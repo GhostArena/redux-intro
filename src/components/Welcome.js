@@ -1,6 +1,8 @@
 import React from "react";
+import AccountOperations from "../features/account/AccountOperations";
 
 const Welcome = () => {
+  const { Deposit, Withdraw, RequestLoan, PayLoan } = AccountOperations;
   return (
     <section>
       <div className="header">
@@ -13,43 +15,10 @@ const Welcome = () => {
         <Deposit />
         <Withdraw />
         <RequestLoan />
+        <PayLoan />
       </div>
     </section>
   );
 };
 
 export default Welcome;
-
-const Deposit = () => {
-  return (
-    <div className="form-items">
-      <label>Deposit</label>
-      <input type="text" />
-      <select>
-        <option>US Dollars</option>
-      </select>
-      <button>Deposit</button>
-    </div>
-  );
-};
-
-const Withdraw = () => {
-  return (
-    <div className="form-items">
-      <label>Withdraw</label>
-      <input type="text" />
-      <button>Withdraw</button>
-    </div>
-  );
-};
-
-const RequestLoan = () => {
-  return (
-    <div className="form-items">
-      <label>Request Loan</label>
-      <input type="text" placeholder="Loan amount" />
-      <input type="text" placeholder="Loan purpose" />
-      <button>Withdraw</button>
-    </div>
-  );
-};

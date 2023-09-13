@@ -1,5 +1,7 @@
 import React from "react";
 import Welcome from "./Welcome";
+import DisplayBalance from "../features/account/DisplayBalance";
+import CreateCustomer from "../features/customer/CreateCustomer";
 
 const Bank = () => {
   return (
@@ -7,26 +9,11 @@ const Bank = () => {
       <div className="header">
         <div className="header-text">
           <h1>🏦 The React-Redux Bank ⚛️</h1>
-          <h4>Create new customer</h4>
         </div>
-        <div className="money">
-          <h1>$123,456.00</h1>
-        </div>
+        <DisplayBalance />
       </div>
       <div>
-        <form>
-          <div className="form-component">
-            <label>Customer full name</label>
-            <input type="text" />
-          </div>
-          <div className="form-component">
-            <label>National ID</label>
-            <input type="text" />
-          </div>
-          <div>
-            <button>CREATE NEW CUSTOMER</button>
-          </div>
-        </form>
+        <CreateCustomer />
       </div>
       <Welcome />
     </div>
