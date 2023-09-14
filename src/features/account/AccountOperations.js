@@ -4,7 +4,7 @@ import { deposit, payLoan, requestLoan, withdraw } from "./accountSlice";
 
 const AccountOperations = () => {
   const [depositAmount, setDepositAmount] = useState("");
-  const [currency, setCurrency] = useState("");
+  const [currency, setCurrency] = useState("USD");
   const [withdrawalAmount, setWithdrawalAmount] = useState("");
   const [loanAmount, setLoanAmount] = useState("");
   const [loanPurpose, setLoanPurpose] = useState("");
@@ -14,13 +14,15 @@ const AccountOperations = () => {
     loan: currentLoan,
     loanPurpose: currentLoanPurpose,
     balance,
+    isLoading,
   } = useSelector((store) => store.account);
 
   const handleDeposit = () => {
     if (!depositAmount) return;
-    dispatch(deposit(Number(depositAmount), currency));
+    // dispatch(deposit(depositAmount, currency));
+    dispatch(deposit(depositAmount));
     setDepositAmount("");
-    setCurrency("");
+    setCurrency("USD");
   };
 
   const handleWithdrawal = () => {
@@ -54,7 +56,9 @@ const AccountOperations = () => {
           <option value="EUR">Euro</option>
           <option value="GBP">British Punds</option>
         </select>
-        <button onClick={handleDeposit}>Deposit {depositAmount}</button>
+        <button onClick={handleDeposit} disabled={isLoading}>
+          {isLoading ? "Converting..." : `Deposit ${depositAmount}`}
+        </button>
       </div>
       <div className="form-items">
         <label>Withdraw</label>
