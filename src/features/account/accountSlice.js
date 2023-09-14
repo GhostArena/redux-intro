@@ -11,7 +11,6 @@ const accountReducer = (state = initialStateAccount, action) => {
     case "account/withdrawal":
       return { ...state, balance: state.balance - action.payload };
     case "account/requestLoan":
-      //   if (state.balance > 0) return state;
       return {
         ...state,
         balance: state.balance + action.payload.amount,
@@ -31,11 +30,25 @@ const accountReducer = (state = initialStateAccount, action) => {
   }
 };
 
-export const deposit = (amount) => {
-  return { type: "account/deposit", payload: amount };
+//Action Creator
+export const deposit = (amount, currency) => {
+  if (currency === "USD") return { type: "account/deposit", payload: amount };
+
+  return async (dispatch, getState) => {
+    //API Call
+    const host = "api.frankfurter.app";
+    const res = await fetch(
+      `https://${host}/latest?amount=${amount}&from=${currency}&to=USD`
+    );
+    const data = await res.json();
+    const converted = data.rates.USD;
+
+    //return action
+    dispatch({ type: "account/deposit", payload: converted });
+  };
 };
 export const withdraw = (amount) => {
-  return { type: "account/withdraw", payload: amount };
+  return { type: "account/withdrawal", payload: amount };
 };
 export const requestLoan = (amount, purpose) => {
   return {

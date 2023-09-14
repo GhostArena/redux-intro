@@ -20,6 +20,7 @@ form {
   align-items: start;
   gap: 1rem;
   width: auto;
+  margin-bottom: 2rem;
 }
 
 .form-items {

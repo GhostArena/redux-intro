@@ -2,8 +2,10 @@ import React from "react";
 import Welcome from "./Welcome";
 import DisplayBalance from "../features/account/DisplayBalance";
 import CreateCustomer from "../features/customer/CreateCustomer";
+import { useSelector } from "react-redux";
 
 const Bank = () => {
+  const fullName = useSelector((state) => state.customer.fullName);
   return (
     <div>
       <div className="header">
@@ -12,10 +14,7 @@ const Bank = () => {
         </div>
         <DisplayBalance />
       </div>
-      <div>
-        <CreateCustomer />
-      </div>
-      <Welcome />
+      <div>{!fullName ? <CreateCustomer /> : <Welcome />}</div>
     </div>
   );
 };
